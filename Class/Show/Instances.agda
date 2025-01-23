@@ -9,6 +9,10 @@ open import Class.Show.Core
 Show-× : ⦃ Show A ⦄ → ⦃ Show B ⦄ → Show (A × B)
 Show-× .show (x , y) = parens $ show x ◇ " , " ◇ show y
 
+Show-Maybe : ⦃ Show A ⦄ → Show (Maybe A)
+Show-Maybe .show nothing  = "nothing"
+Show-Maybe .show (just x) = "just " ◇ show x
+
 Show-List : ⦃ Show A ⦄ → Show (List A)
 Show-List .show = braces ∘ intersperse ", " ∘ map show
 
