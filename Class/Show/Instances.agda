@@ -33,6 +33,9 @@ instance
   Show-ℤ = Show _ ∋ record {M}
     where import Data.Integer.Show as M
 
+  Show-ℚ = Show _ ∋ record {M}
+    where import Data.Rational.Show as M
+
   Show-Fin : Show¹ Fin
   Show-Fin .show = ("# " ◇_) ∘ show ∘ toℕ
     where open import Data.Fin using (toℕ)
