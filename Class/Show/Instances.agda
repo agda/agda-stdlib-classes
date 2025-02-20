@@ -9,6 +9,10 @@ open import Class.Show.Core
 Show-× : ⦃ Show A ⦄ → ⦃ Show B ⦄ → Show (A × B)
 Show-× .show (x , y) = parens $ show x ◇ " , " ◇ show y
 
+Show-Maybe : ⦃ Show A ⦄ → Show (Maybe A)
+Show-Maybe .show nothing  = "nothing"
+Show-Maybe .show (just x) = "just " ◇ show x
+
 Show-List : ⦃ Show A ⦄ → Show (List A)
 Show-List .show = braces ∘ intersperse ", " ∘ map show
 
@@ -28,6 +32,9 @@ instance
 
   Show-ℤ = Show _ ∋ record {M}
     where import Data.Integer.Show as M
+
+  Show-ℚ = Show _ ∋ record {M}
+    where import Data.Rational.Show as M
 
   Show-Fin : Show¹ Fin
   Show-Fin .show = ("# " ◇_) ∘ show ∘ toℕ
