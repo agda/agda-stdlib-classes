@@ -49,36 +49,39 @@ module _ {A : Type ℓ}
         
   open □ public 
 
-  -- □ is a comonad over the category of monotone predicates over `A`  
-  extract : ∀ {P} → ∀[ □ P ⇒ P ]
-  extract px = □⟨ px ⟩ reflexive _≡_.refl
+  module Operations where 
 
-  duplicate : ∀ {P} → ∀[ □ P ⇒ □ (□ P) ]
-  duplicate px = necessary λ ι → necessary λ ι′ → □⟨ px ⟩ trans ι ι′ 
-
-
-  -- ◇ is a monad over the category of monotone predicates over `A`.
-  return : ∀ {P} → ∀[ P ⇒ ◇ P ]
-  return px = ◇⟨ reflexive _≡_.refl , px ⟩
-
-  join : ∀ {P} → ∀[ ◇ (◇ P) ⇒ ◇ P ]
-  join ◇⟨ ι₁ , ◇⟨ ι₂ , px ⟩ ⟩ = ◇⟨ (trans ι₂ ι₁) , px ⟩
-
-  -- □ is right-adjoint to ◇
-  curry : ∀ {P Q} → ∀[ ◇ P ⇒ Q ] → ∀[ P ⇒ □ Q ]
-  curry f px = necessary (λ ι → f ◇⟨ ι , px ⟩)
-
-  uncurry : ∀ {P Q} → ∀[ P ⇒ □ Q ] → ∀[ ◇ P ⇒ Q ]
-  uncurry f ◇⟨ ι , px ⟩ = □⟨ f px ⟩ ι
+    -- □ is a comonad over the category of monotone predicates over `A`  
+    extract : ∀ {P} → ∀[ □ P ⇒ P ]
+    extract px = □⟨ px ⟩ reflexive _≡_.refl
   
-
-  -- The "Kripke exponent" (or, Kripke function space) between two predicates is
-  -- defined as the necessity of their implication.
-  _⇛_ : ∀ (P Q : Pred A ℓ) → Pred A ℓ 
-  P ⇛ Q = □ (P ⇒ Q) 
-
-  kripke-curry : {P Q R : Pred A ℓ} → ⦃ Monotone P ⦄ → ∀[ (P ∩ Q) ⇒ R ] → ∀[ P ⇒ (Q ⇛ R) ] 
-  kripke-curry f px₁ = necessary (λ i px₂ → f (weaken i px₁ , px₂))
+    duplicate : ∀ {P} → ∀[ □ P ⇒ □ (□ P) ]
+    duplicate px = necessary λ ι → necessary λ ι′ → □⟨ px ⟩ trans ι ι′ 
   
-  kripke-uncurry : {P Q R : Pred A ℓ} → ∀[ P ⇒ (Q ⇛ R) ] → ∀[ (P ∩ Q) ⇒ R ] 
-  kripke-uncurry f (px₁ , px₂) = □⟨ f px₁ ⟩ reflexive _≡_.refl $ px₂
+  
+    -- ◇ is a monad over the category of monotone predicates over `A`.
+    return : ∀ {P} → ∀[ P ⇒ ◇ P ]
+    return px = ◇⟨ reflexive _≡_.refl , px ⟩
+  
+    join : ∀ {P} → ∀[ ◇ (◇ P) ⇒ ◇ P ]
+    join ◇⟨ ι₁ , ◇⟨ ι₂ , px ⟩ ⟩ = ◇⟨ (trans ι₂ ι₁) , px ⟩
+  
+    -- □ is right-adjoint to ◇
+    curry : ∀ {P Q} → ∀[ ◇ P ⇒ Q ] → ∀[ P ⇒ □ Q ]
+    curry f px = necessary (λ ι → f ◇⟨ ι , px ⟩)
+  
+    uncurry : ∀ {P Q} → ∀[ P ⇒ □ Q ] → ∀[ ◇ P ⇒ Q ]
+    uncurry f ◇⟨ ι , px ⟩ = □⟨ f px ⟩ ι
+    
+  
+    -- The "Kripke exponent" (or, Kripke function space) between two predicates is
+    -- defined as the necessity of their implication.
+    _⇛_ : ∀ (P Q : Pred A ℓ) → Pred A ℓ 
+    P ⇛ Q = □ (P ⇒ Q) 
+  
+    kripke-curry : {P Q R : Pred A ℓ} → ⦃ Monotone P ⦄ → ∀[ (P ∩ Q) ⇒ R ] → ∀[ P ⇒ (Q ⇛ R) ] 
+    kripke-curry f px₁ = necessary (λ i px₂ → f (weaken i px₁ , px₂))
+    
+    kripke-uncurry : {P Q R : Pred A ℓ} → ∀[ P ⇒ (Q ⇛ R) ] → ∀[ (P ∩ Q) ⇒ R ] 
+    kripke-uncurry f (px₁ , px₂) = □⟨ f px₁ ⟩ reflexive _≡_.refl $ px₂
+  
