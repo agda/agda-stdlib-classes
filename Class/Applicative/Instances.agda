@@ -6,44 +6,45 @@ open import Class.Functor.Core
 open import Class.Functor.Instances
 open import Class.Applicative.Core
 
+private variable a : Level
+
 instance
-  Applicative-Maybe : Applicative Maybe
+  Applicative-Maybe : Applicative {a} Maybe
   Applicative-Maybe = λ where
     .pure → just
     ._<*>_ → maybe fmap (const nothing)
 
-  Applicative₀-Maybe : Applicative₀ Maybe
+  Applicative₀-Maybe : Applicative₀ {a} Maybe
   Applicative₀-Maybe .ε₀ = nothing
 
-  Alternative-Maybe : Alternative Maybe
+  Alternative-Maybe : Alternative {a} Maybe
   Alternative-Maybe ._<|>_ = May._<∣>_
     where import Data.Maybe as May
 
-  Applicative-List : Applicative List
+  Applicative-List : Applicative {a} List
   Applicative-List = λ where
     .pure → [_]
     ._<*>_ → flip $ concatMap ∘ _<&>_
 
-  Applicative₀-List : Applicative₀ List
+  Applicative₀-List : Applicative₀ {a} List
   Applicative₀-List .ε₀ = []
 
-  Alternative-List : Alternative List
+  Alternative-List : Alternative {a} List
   Alternative-List ._<|>_ = _++_
 
-  Applicative-List⁺ : Applicative List⁺
+  Applicative-List⁺ : Applicative {a} List⁺
   Applicative-List⁺ = λ where
     .pure → L⁺.[_]
     ._<*>_ → flip $ L⁺.concatMap ∘ _<&>_
    where import Data.List.NonEmpty as L⁺
 
-  Applicative-Vec : ∀ {n} → Applicative (flip Vec n)
+  Applicative-Vec : ∀ {n} → Applicative {a} (flip Vec n)
   Applicative-Vec = λ where
     .pure → V.replicate _
     ._<*>_ → V._⊛_
    where import Data.Vec as V
 
-
-  Applicative₀-Vec : Applicative₀ (flip Vec 0)
+  Applicative₀-Vec : Applicative₀ {a} (flip Vec 0)
   Applicative₀-Vec .ε₀ = []
 
   -- Applicative-∃Vec : Applicative (∃ ∘ Vec)
@@ -55,8 +56,8 @@ instance
     open import Reflection.TCM.Syntax public
     open import Reflection.TCM public
 
-  Alternative-TC : Alternative TC
+  Alternative-TC : Alternative {a} TC
   Alternative-TC = record {M}
 
-  Applicative-TC : Applicative TC
+  Applicative-TC : Applicative {a} TC
   Applicative-TC = record {M}

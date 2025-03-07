@@ -7,8 +7,10 @@ open import Class.Semigroup
 open import Class.Monoid
 open import Class.Foldable.Core
 
+private variable a : Level
+
 instance
-  Foldable-List : Foldable List
+  Foldable-List : Foldable {a} List
   Foldable-List .fold = go where go = λ where
     [] → ε
     (x ∷ []) → x
