@@ -45,14 +45,11 @@ module _ ⦃ _ : DecEq A ⦄ where instance
   DecEq-Maybe ._≟_ = M.≡-dec _≟_
     where import Data.Maybe.Properties as M
 
-  open import Data.Refinement
-
-  -- Equality for a Refinement type is decide if the equality
-  -- for the type to be refined is decidable.
-  DecEq-Refinement : ∀ {p} {P : A → Set p} → DecEq (Refinement A P)
-  DecEq-Refinement ._≟_ (x , px) (y , py) with x ≟ y
-  ... | no neq = no (neq ∘ cong value)
+  DecEq-Refinement : ∀ {P : A → Set ℓ} → DecEq (Refinement A P)
+  DecEq-Refinement ._≟_ x y
+    with x .value ≟ y .value
   ... | yes refl = yes refl
+  ... | no ¬eq   = no (¬eq ∘ cong value)
 
 module _ ⦃ _ : DecEq A ⦄ ⦃ _ : DecEq B ⦄ where
 
