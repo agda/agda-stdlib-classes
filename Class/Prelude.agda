@@ -42,6 +42,8 @@ open import Data.Vec public
   using (Vec; []; _∷_)
 open import Data.These public
   using (These; this; that; these)
+open import Data.Refinement public
+  using (Refinement; _,_; value)
 
 open import Relation.Nullary public
   using (¬_; Dec; yes; no; contradiction)
