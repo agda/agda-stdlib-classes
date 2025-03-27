@@ -21,3 +21,9 @@ instance
     .return → just
     ._>>=_  → Maybe._>>=_
    where import Data.Maybe as Maybe
+
+  Monad-Sum : Monad {a} (A ⊎_)
+  Monad-Sum = λ where
+    .return → inj₂
+    ._>>=_ (inj₁ x) f → inj₁ x
+    ._>>=_ (inj₂ y) f → f y
