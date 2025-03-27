@@ -7,6 +7,6 @@ open import Class.Functor
 open import Class.Semigroup
 open import Class.Monoid
 
-record Foldable (F : Type↑) ⦃ _ : Functor F ⦄ : Typeω where
+record Foldable {a b} (F : Type a → Type b) ⦃ _ : Functor F ⦄ : Type (lsuc (a ⊔ b)) where
   field fold : ⦃ _ : Semigroup A ⦄ → ⦃ Monoid A ⦄ → F A → A
 open Foldable ⦃...⦄ public
