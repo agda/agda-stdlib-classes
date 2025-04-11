@@ -6,7 +6,7 @@ open import Class.Core
 open import Class.Functor
 open import Class.Applicative
 
-record Monad (M : Type↑) : Typeω where
+record Monad (M : Type↑ ℓ↑) : Typeω where
   infixl 1 _>>=_ _>>_ _>=>_
   infixr 1 _=<<_ _<=<_
 

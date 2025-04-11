@@ -6,7 +6,7 @@ open import Class.Core
 open import Class.Functor.Core
 open import Class.Monad
 
-record Traversable (F : Type↑) ⦃ _ : Functor F ⦄ : Typeω where
+record Traversable (F : Type↑ ℓ↑) ⦃ _ : Functor F ⦄ : Typeω where
   field sequence : ⦃ Monad M ⦄ → F (M A) → M (F A)
 
   traverse : ⦃ Monad M ⦄ → (A → M B) → F A → M (F B)
