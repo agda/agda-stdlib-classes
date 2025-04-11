@@ -6,10 +6,16 @@ open import Class.Prelude
 Type[_↝_] : ∀ ℓ ℓ′ → Type (lsuc ℓ ⊔ lsuc ℓ′)
 Type[ ℓ ↝ ℓ′ ] = Type ℓ → Type ℓ′
 
-Type↑ : Typeω
-Type↑ = ∀ {ℓ} → Type[ ℓ ↝ ℓ ]
+Level↑ = Level → Level
 
-module _ (M : Type↑) where
+variable ℓ↑ ℓ↑′ ℓ↑″ : Level↑
+
+Type↑ : Level↑ → Typeω
+Type↑ ℓ↑ = ∀ {ℓ} → Type[ ℓ ↝ ℓ↑ ℓ ]
+
+variable M F : Type↑ ℓ↑
+
+module _ (M : Type↑ ℓ↑) where
   _¹ : (A → Type ℓ) → Type _
   _¹ P = ∀ {x} → M (P x)
 
@@ -18,6 +24,3 @@ module _ (M : Type↑) where
 
   _³ : (A → B → C → Type ℓ) → Type _
   _³ _~_~_ = ∀ {x y z} → M (x ~ y ~ z)
-
-variable
-  M F : Type↑
