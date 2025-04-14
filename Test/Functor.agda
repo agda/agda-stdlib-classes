@@ -30,3 +30,9 @@ _ = map₂′ id (1 , 2 ∷ []) ≡ ((∃ λ n → Vec ℕ n) ∋ (1 , 2 ∷ [])
   ∋ refl
 _ = bimap′ suc (2 ∷_) (0 , []) ≡ ((∃ λ n → Vec ℕ n) ∋ (1 , 2 ∷ []))
   ∋ refl
+
+-- ** cross-level mapping
+module _ (X : Type) (Y : Type₁) (Z : Type₂) (g : X → Y) (f : Y → Z) (xs : List X) where
+  _ : fmap (f ∘ g)      xs
+    ≡ (fmap f ∘ fmap g) xs
+  _ = fmap-∘ xs

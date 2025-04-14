@@ -6,7 +6,7 @@ open import Class.Core
 
 private variable a b c : Level
 
-record Functor (F : Type↑) : Typeω where
+record Functor (F : Type↑ ℓ↑) : Typeω where
   infixl 4 _<$>_ _<$_
   infixl 1 _<&>_
 
@@ -20,7 +20,7 @@ record Functor (F : Type↑) : Typeω where
   _<&>_ = flip _<$>_
 open Functor ⦃...⦄ public
 
-record FunctorLaws (F : Type↑) ⦃ _ : Functor F ⦄ : Typeω where
+record FunctorLaws (F : Type↑ ℓ↑) ⦃ _ : Functor F ⦄ : Typeω where
   field
     -- preserves identity morphisms
     fmap-id : ∀ {A : Type a} (x : F A) →
