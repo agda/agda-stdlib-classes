@@ -25,11 +25,13 @@ open import Class.HasAdd public
 open import Class.HasOrder public
 open import Class.Show public
 open import Class.ToBool public
-open import Class.MonotonePredicate public 
+open import Class.MonotonePredicate public
 
 -- ** Tests
 open import Test.Monoid
 open import Test.Functor
+open import Test.Monad
 open import Test.DecEq
 open import Test.Decidable
 open import Test.Show
+open import Test.Reflection
