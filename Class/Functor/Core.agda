@@ -6,7 +6,7 @@ open import Class.Core
 
 private variable a b c : Level
 
-record Functor (F : Type↑) : Typeω where
+record Functor (F : Type↑ ℓ↑ ℓ↑′) : Typeω where
   infixl 4 _<$>_ _<$_
   infixl 1 _<&>_
 
@@ -20,13 +20,13 @@ record Functor (F : Type↑) : Typeω where
   _<&>_ = flip _<$>_
 open Functor ⦃...⦄ public
 
-record FunctorLaws (F : Type↑) ⦃ _ : Functor F ⦄ : Typeω where
+record FunctorLaws (F : Type↑ ℓ↑ ℓ↑′) ⦃ _ : Functor (λ {ℓ} → F {ℓ}) ⦄ : Typeω where
   field
     -- preserves identity morphisms
-    fmap-id : ∀ {A : Type a} (x : F A) →
+    fmap-id : ∀ {A : Type (ℓ↑ a)} (x : F {a} A) →
       fmap id x ≡ x
     -- preserves composition of morphisms
-    fmap-∘  : ∀ {A : Type a} {B : Type b} {C : Type c}
-                {f : B → C} {g : A → B} (x : F A) →
-      fmap (f ∘ g) x ≡ (fmap f ∘ fmap g) x
+    fmap-∘  : ∀ {A : Type (ℓ↑ a)} {B : Type (ℓ↑ b)} {C : Type (ℓ↑ c)}
+                {f : B → C} {g : A → B} (x : F {a} A) →
+      fmap (f ∘ g) x ≡ (fmap {F = F} {b}{A = B} {c}{B = C} f ∘ fmap  g) x
 open FunctorLaws ⦃...⦄ public

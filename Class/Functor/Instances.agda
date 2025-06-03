@@ -4,8 +4,10 @@ module Class.Functor.Instances where
 open import Class.Prelude
 open import Class.Functor.Core
 
+private Functor↓ = Functor {id}
+
 instance
-  Functor-Maybe : Functor Maybe
+  Functor-Maybe : Functor↓ Maybe
   Functor-Maybe = record {M}
     where import Data.Maybe as M renaming (map to _<$>_)
 
@@ -14,7 +16,7 @@ instance
     .fmap-id → λ where (just _) → refl; nothing → refl
     .fmap-∘  → λ where (just _) → refl; nothing → refl
 
-  Functor-List : Functor List
+  Functor-List : Functor↓ List
   Functor-List ._<$>_ = map
 
   FunctorLaws-List : FunctorLaws List
@@ -31,25 +33,25 @@ instance
         [] → refl
         (x ∷ xs) → cong (f (g x) ∷_) (q xs)
 
-  Functor-List⁺ : Functor List⁺
+  Functor-List⁺ : Functor↓ List⁺
   Functor-List⁺ = record {L}
     where import Data.List.NonEmpty as L renaming (map to _<$>_)
 
-  Functor-Vec : ∀ {n} → Functor (flip Vec n)
+  Functor-Vec : ∀ {n} → Functor↓ (flip Vec n)
   Functor-Vec = record {V}
     where import Data.Vec as V renaming (map to _<$>_)
 
-  Functor-TC : Functor TC
+  Functor-TC : Functor↓ TC
   Functor-TC = record {R}
     where import Reflection.TCM.Syntax as R
 
-  Functor-Abs : Functor Abs
+  Functor-Abs : Functor↓ Abs
   Functor-Abs = record {R}
     where import Reflection.AST.Abstraction as R renaming (map to _<$>_)
 
-  Functor-Arg : Functor Arg
+  Functor-Arg : Functor↓ Arg
   Functor-Arg = record {R}
     where import Reflection.AST.Argument as R renaming (map to _<$>_)
 
-  Functor-∃Vec : Functor (∃ ∘ Vec)
+  Functor-∃Vec : Functor↓ (∃ ∘ Vec)
   Functor-∃Vec ._<$>_ f (_ , xs) = -, (f <$> xs)

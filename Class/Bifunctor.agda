@@ -13,7 +13,7 @@ private variable
 
 -- ** indexed/dependent version
 record BifunctorI
-  (F : (A : Type a) (B : A → Type b) → Type (a ⊔ b)) : Type (lsuc (a ⊔ b)) where
+  (F : ∀ {a b} → (A : Type a) (B : A → Type b) → Type (ℓ↑² a b)) : Typeω where
   field
     bimap′ : (f : A → A′) → (∀ {x} → B x → C (f x)) → F A B → F A′ C
 
@@ -30,11 +30,11 @@ record BifunctorI
 open BifunctorI ⦃...⦄ public
 
 instance
-  Bifunctor-Σ : BifunctorI {a}{b} Σ
+  Bifunctor-Σ : BifunctorI Σ
   Bifunctor-Σ .bimap′ = ×.map
 
 -- ** non-dependent version
-record Bifunctor (F : Type a → Type b → Type (a ⊔ b)) : Type (lsuc (a ⊔ b)) where
+record Bifunctor (F : Type↑² ℓ↑²) : Typeω where
   field
     bimap : ∀ {A A′ : Type a} {B B′ : Type b} → (A → A′) → (B → B′) → F A B → F A′ B′
 
@@ -50,16 +50,15 @@ record Bifunctor (F : Type a → Type b → Type (a ⊔ b)) : Type (lsuc (a ⊔ 
 
 open Bifunctor ⦃...⦄ public
 
-map₁₂ : ∀ {F : Type a → Type a → Type a} {A B : Type a}
-  → ⦃ Bifunctor F ⦄
-  → (A → B) → F A A → F B B
+map₁₂ : ∀ {F : Type↑² ℓ↑²} ⦃ _ : Bifunctor F ⦄ →
+  (∀ {a} {A B : Type a} → (A → B) → F A A → F B B)
 map₁₂ f = bimap f f
 _<$>₁₂_ = map₁₂
 infixl 4 _<$>₁₂_
 
 instance
-  Bifunctor-× : Bifunctor {a}{b} _×_
+  Bifunctor-× : Bifunctor _×_
   Bifunctor-× .bimap f g = ×.map f g
 
-  Bifunctor-⊎ : Bifunctor {a}{b} _⊎_
+  Bifunctor-⊎ : Bifunctor _⊎_
   Bifunctor-⊎ .bimap = ⊎.map
