@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Test.Coercions</title><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css'/><style>.github-fork-ribbon:before { background-color: #333; }</style><link rel="stylesheet" href="css/Agda.css"></head><body><a class='github-fork-ribbon'href='https://github.com/agda/agda-stdlib-classes/tree/master///Test/Coercions.agda'data-ribbon='Source code on Github' title='Source code on Github'>Source code on Github</a><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--cubical-compatible</a> <a id="34" class="Symbol">#-}</a>
+<a id="38" class="Keyword">module</a> <a id="45" href="Test.Coercions.html" class="Module">Test.Coercions</a> <a id="60" class="Keyword">where</a>
+
+<a id="67" class="Keyword">open</a> <a id="72" class="Keyword">import</a> <a id="79" href="Class.Prelude.html" class="Module">Class.Prelude</a>
+<a id="93" class="Keyword">open</a> <a id="98" class="Keyword">import</a> <a id="105" href="Class.Coercions.html" class="Module">Class.Coercions</a>
+
+<a id="𝟚"></a><a id="122" href="Test.Coercions.html#122" class="Function">𝟚</a> <a id="124" class="Symbol">=</a> <a id="126" href="Agda.Builtin.Unit.html#175" class="Record">⊤</a> <a id="128" href="Data.Sum.Base.html#625" class="Datatype Operator">⊎</a> <a id="130" href="Agda.Builtin.Unit.html#175" class="Record">⊤</a>
+<a id="132" class="Keyword">pattern</a> <a id="𝕃"></a><a id="140" href="Test.Coercions.html#140" class="InductiveConstructor">𝕃</a> <a id="142" class="Symbol">=</a> <a id="144" href="Data.Sum.Base.html#675" class="InductiveConstructor">inj₁</a> <a id="149" href="Agda.Builtin.Unit.html#212" class="InductiveConstructor">tt</a><a id="151" class="Symbol">;</a> <a id="153" class="Keyword">pattern</a> <a id="ℝ"></a><a id="161" href="Test.Coercions.html#161" class="InductiveConstructor">ℝ</a> <a id="163" class="Symbol">=</a> <a id="165" href="Data.Sum.Base.html#700" class="InductiveConstructor">inj₂</a> <a id="170" href="Agda.Builtin.Unit.html#212" class="InductiveConstructor">tt</a>
+
+<a id="174" class="Keyword">instance</a>
+  <a id="↝Bool"></a><a id="185" href="Test.Coercions.html#185" class="Function">↝Bool</a> <a id="191" class="Symbol">:</a> <a id="193" href="Test.Coercions.html#122" class="Function">𝟚</a> <a id="195" href="Class.Coercions.html#115" class="Record Operator">↝</a> <a id="197" href="Agda.Builtin.Bool.html#173" class="Datatype">Bool</a>
+  <a id="204" href="Test.Coercions.html#185" class="Function">↝Bool</a> <a id="210" class="Symbol">.</a><a id="211" href="Class.Coercions.html#168" class="Field">to</a> <a id="214" class="Symbol">=</a> <a id="216" class="Symbol">λ</a> <a id="218" class="Keyword">where</a>
+    <a id="228" href="Test.Coercions.html#140" class="InductiveConstructor">𝕃</a> <a id="230" class="Symbol">→</a> <a id="232" href="Agda.Builtin.Bool.html#198" class="InductiveConstructor">true</a>
+    <a id="241" href="Test.Coercions.html#161" class="InductiveConstructor">ℝ</a> <a id="243" class="Symbol">→</a> <a id="245" href="Agda.Builtin.Bool.html#192" class="InductiveConstructor">false</a>
+
+  <a id="Bool↝"></a><a id="254" href="Test.Coercions.html#254" class="Function">Bool↝</a> <a id="260" class="Symbol">:</a> <a id="262" href="Agda.Builtin.Bool.html#173" class="Datatype">Bool</a> <a id="267" href="Class.Coercions.html#115" class="Record Operator">↝</a> <a id="269" href="Test.Coercions.html#122" class="Function">𝟚</a>
+  <a id="273" href="Test.Coercions.html#254" class="Function">Bool↝</a> <a id="279" class="Symbol">.</a><a id="280" href="Class.Coercions.html#168" class="Field">to</a> <a id="283" class="Symbol">=</a> <a id="285" class="Symbol">λ</a> <a id="287" class="Keyword">where</a>
+    <a id="297" href="Agda.Builtin.Bool.html#198" class="InductiveConstructor">true</a>  <a id="303" class="Symbol">→</a> <a id="305" href="Test.Coercions.html#140" class="InductiveConstructor">𝕃</a>
+    <a id="311" href="Agda.Builtin.Bool.html#192" class="InductiveConstructor">false</a> <a id="317" class="Symbol">→</a> <a id="319" href="Test.Coercions.html#161" class="InductiveConstructor">ℝ</a>
+
+<a id="322" href="Test.Coercions.html#322" class="Function">_</a> <a id="324" class="Symbol">:</a> <a id="326" href="Agda.Builtin.Bool.html#173" class="Datatype">Bool</a>
+<a id="331" class="Symbol">_</a> <a id="333" class="Symbol">=</a> <a id="335" href="Class.Coercions.html#168" class="Field">to</a> <a id="338" href="Test.Coercions.html#140" class="InductiveConstructor">𝕃</a>
+
+<a id="341" href="Test.Coercions.html#341" class="Function">_</a> <a id="343" class="Symbol">:</a> <a id="345" href="Test.Coercions.html#122" class="Function">𝟚</a>
+<a id="347" class="Symbol">_</a> <a id="349" class="Symbol">=</a> <a id="351" href="Class.Coercions.html#168" class="Field">to</a> <a id="354" href="Agda.Builtin.Bool.html#198" class="InductiveConstructor">true</a>
+
+<a id="360" href="Test.Coercions.html#360" class="Function">_</a> <a id="362" class="Symbol">:</a> <a id="364" href="Agda.Builtin.Bool.html#173" class="Datatype">Bool</a> <a id="369" class="Symbol">→</a> <a id="371" href="Agda.Builtin.Bool.html#173" class="Datatype">Bool</a>
+<a id="376" class="Symbol">_</a> <a id="378" class="Symbol">=</a> <a id="380" href="Data.Bool.Base.html#941" class="Function">not</a> <a id="384" href="Function.Base.html#1115" class="Function Operator">∘</a> <a id="386" href="Class.Coercions.html#168" class="Field">to[</a> <a id="390" href="Agda.Builtin.Bool.html#173" class="Datatype">Bool</a> <a id="395" href="Class.Coercions.html#168" class="Field">]</a> <a id="397" href="Function.Base.html#1115" class="Function Operator">∘</a> <a id="399" href="Class.Coercions.html#168" class="Field">to[</a> <a id="403" href="Test.Coercions.html#122" class="Function">𝟚</a> <a id="405" href="Class.Coercions.html#168" class="Field">]</a>
+</pre></body></html>

@@ -50,15 +50,16 @@
   <a id="1211" class="Comment">-- Applicative-∃Vec : Applicative (∃ ∘ Vec)</a>
   <a id="1257" class="Comment">-- Applicative-∃Vec = λ where</a>
   <a id="1289" class="Comment">--   .pure x → 1 , pure x</a>
-  <a id="1317" class="Comment">--   ._&lt;*&gt;_ (n , xs) (m , ys) → {! (n ⊔ m) , zipWith _$_ xs ys  -- (+ zipWith-⊔ lemma) !}</a>
+  <a id="1317" class="Comment">--   ._&lt;*&gt;_ (n , xs) (m , ys) →</a>
+  <a id="1351" class="Comment">--     {! (n ⊔ m) , zipWith _$_ xs ys (+ zipWith-⊔ lemma) !}</a>
 
-  <a id="1410" class="Keyword">private</a> <a id="1418" class="Keyword">module</a> <a id="M"></a><a id="1425" href="Class.Applicative.Instances.html#1425" class="Module">M</a> <a id="1427" class="Keyword">where</a>
-    <a id="1437" class="Keyword">open</a> <a id="1442" class="Keyword">import</a> <a id="1449" href="Reflection.TCM.Syntax.html" class="Module">Reflection.TCM.Syntax</a> <a id="1471" class="Keyword">public</a>
-    <a id="1482" class="Keyword">open</a> <a id="1487" class="Keyword">import</a> <a id="1494" href="Reflection.TCM.html" class="Module">Reflection.TCM</a> <a id="1509" class="Keyword">public</a>
+  <a id="1415" class="Keyword">private</a> <a id="1423" class="Keyword">module</a> <a id="M"></a><a id="1430" href="Class.Applicative.Instances.html#1430" class="Module">M</a> <a id="1432" class="Keyword">where</a>
+    <a id="1442" class="Keyword">open</a> <a id="1447" class="Keyword">import</a> <a id="1454" href="Reflection.TCM.Syntax.html" class="Module">Reflection.TCM.Syntax</a> <a id="1476" class="Keyword">public</a>
+    <a id="1487" class="Keyword">open</a> <a id="1492" class="Keyword">import</a> <a id="1499" href="Reflection.TCM.html" class="Module">Reflection.TCM</a> <a id="1514" class="Keyword">public</a>
 
-  <a id="Alternative-TC"></a><a id="1519" href="Class.Applicative.Instances.html#1519" class="Function">Alternative-TC</a> <a id="1534" class="Symbol">:</a> <a id="1536" href="Class.Applicative.Core.html#865" class="Record">Alternative</a> <a id="1548" href="Agda.Builtin.Reflection.html#8617" class="Postulate">TC</a>
-  <a id="1553" href="Class.Applicative.Instances.html#1519" class="Function">Alternative-TC</a> <a id="1568" class="Symbol">=</a> <a id="1570" class="Keyword">record</a> <a id="1577" class="Symbol">{</a><a id="1578" href="Class.Applicative.Instances.html#1425" class="Module">M</a><a id="1579" class="Symbol">}</a>
+  <a id="Alternative-TC"></a><a id="1524" href="Class.Applicative.Instances.html#1524" class="Function">Alternative-TC</a> <a id="1539" class="Symbol">:</a> <a id="1541" href="Class.Applicative.Core.html#865" class="Record">Alternative</a> <a id="1553" href="Agda.Builtin.Reflection.html#8617" class="Postulate">TC</a>
+  <a id="1558" href="Class.Applicative.Instances.html#1524" class="Function">Alternative-TC</a> <a id="1573" class="Symbol">=</a> <a id="1575" class="Keyword">record</a> <a id="1582" class="Symbol">{</a><a id="1583" href="Class.Applicative.Instances.html#1430" class="Module">M</a><a id="1584" class="Symbol">}</a>
 
-  <a id="Applicative-TC"></a><a id="1584" href="Class.Applicative.Instances.html#1584" class="Function">Applicative-TC</a> <a id="1599" class="Symbol">:</a> <a id="1601" href="Class.Applicative.Core.html#163" class="Record">Applicative</a> <a id="1613" href="Agda.Builtin.Reflection.html#8617" class="Postulate">TC</a>
-  <a id="1618" href="Class.Applicative.Instances.html#1584" class="Function">Applicative-TC</a> <a id="1633" class="Symbol">=</a> <a id="1635" class="Keyword">record</a> <a id="1642" class="Symbol">{</a><a id="1643" href="Class.Applicative.Instances.html#1425" class="Module">M</a><a id="1644" class="Symbol">}</a>
+  <a id="Applicative-TC"></a><a id="1589" href="Class.Applicative.Instances.html#1589" class="Function">Applicative-TC</a> <a id="1604" class="Symbol">:</a> <a id="1606" href="Class.Applicative.Core.html#163" class="Record">Applicative</a> <a id="1618" href="Agda.Builtin.Reflection.html#8617" class="Postulate">TC</a>
+  <a id="1623" href="Class.Applicative.Instances.html#1589" class="Function">Applicative-TC</a> <a id="1638" class="Symbol">=</a> <a id="1640" class="Keyword">record</a> <a id="1647" class="Symbol">{</a><a id="1648" href="Class.Applicative.Instances.html#1430" class="Module">M</a><a id="1649" class="Symbol">}</a>
 </pre></body></html>

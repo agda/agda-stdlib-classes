@@ -2,36 +2,53 @@
 <html><head><meta charset="utf-8"><title>standard-library-classes</title><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css'/><style>.github-fork-ribbon:before { background-color: #333; }</style><link rel="stylesheet" href="css/Agda.css"></head><body><a class='github-fork-ribbon'href='https://github.com/agda/agda-stdlib-classes/tree/master/'data-ribbon='Source code on Github' title='Source code on Github'>Source code on Github</a><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--with-K</a> <a id="22" class="Symbol">#-}</a>
 <a id="26" class="Keyword">module</a> <a id="33" href="standard-library-classes.html" class="Module">standard-library-classes</a> <a id="58" class="Keyword">where</a>
 
-<a id="65" class="Comment">-- ** Algebraic structures</a>
-<a id="92" class="Keyword">open</a> <a id="97" class="Keyword">import</a> <a id="104" href="Class.Semigroup.html" class="Module">Class.Semigroup</a> <a id="120" class="Keyword">public</a>
-<a id="127" class="Keyword">open</a> <a id="132" class="Keyword">import</a> <a id="139" href="Class.Monoid.html" class="Module">Class.Monoid</a> <a id="152" class="Keyword">public</a>
-<a id="159" class="Keyword">open</a> <a id="164" class="Keyword">import</a> <a id="171" href="Class.CommutativeMonoid.html" class="Module">Class.CommutativeMonoid</a> <a id="195" class="Keyword">public</a>
-<a id="202" class="Keyword">open</a> <a id="207" class="Keyword">import</a> <a id="214" href="Class.Functor.html" class="Module">Class.Functor</a> <a id="228" class="Keyword">public</a>
-<a id="235" class="Keyword">open</a> <a id="240" class="Keyword">import</a> <a id="247" href="Class.Bifunctor.html" class="Module">Class.Bifunctor</a> <a id="263" class="Keyword">public</a>
-<a id="270" class="Keyword">open</a> <a id="275" class="Keyword">import</a> <a id="282" href="Class.Applicative.html" class="Module">Class.Applicative</a> <a id="300" class="Keyword">public</a>
-<a id="307" class="Keyword">open</a> <a id="312" class="Keyword">import</a> <a id="319" href="Class.Monad.html" class="Module">Class.Monad</a> <a id="331" class="Keyword">public</a>
-<a id="338" class="Keyword">open</a> <a id="343" class="Keyword">import</a> <a id="350" href="Class.Foldable.html" class="Module">Class.Foldable</a> <a id="365" class="Keyword">public</a>
-<a id="372" class="Keyword">open</a> <a id="377" class="Keyword">import</a> <a id="384" href="Class.Traversable.html" class="Module">Class.Traversable</a> <a id="402" class="Keyword">public</a>
+<a id="65" class="Keyword">open</a> <a id="70" class="Keyword">import</a> <a id="77" href="Class.Prelude.html" class="Module">Class.Prelude</a>
+<a id="91" class="Keyword">open</a> <a id="96" class="Keyword">import</a> <a id="103" href="Class.Newtype.html" class="Module">Class.Newtype</a><a id="116" class="Symbol">;</a> <a id="118" class="Keyword">import</a> <a id="125" href="Test.Newtype.html" class="Module">Test.Newtype</a>
 
-<a id="410" class="Comment">-- ** Decidability</a>
-<a id="429" class="Keyword">open</a> <a id="434" class="Keyword">import</a> <a id="441" href="Class.DecEq.html" class="Module">Class.DecEq</a> <a id="453" class="Keyword">public</a>
-<a id="460" class="Keyword">open</a> <a id="465" class="Keyword">import</a> <a id="472" href="Class.DecEq.WithK.html" class="Module">Class.DecEq.WithK</a> <a id="490" class="Keyword">public</a>
-<a id="497" class="Keyword">open</a> <a id="502" class="Keyword">import</a> <a id="509" href="Class.Decidable.html" class="Module">Class.Decidable</a> <a id="525" class="Keyword">public</a>
+<a id="139" class="Comment">-- ** Algebraic structures</a>
+<a id="166" class="Keyword">open</a> <a id="171" class="Keyword">import</a> <a id="178" href="Class.Setoid.html" class="Module">Class.Setoid</a> <a id="191" class="Keyword">public</a>
+<a id="198" class="Keyword">open</a> <a id="203" class="Keyword">import</a> <a id="210" href="Class.Semigroup.html" class="Module">Class.Semigroup</a> <a id="226" class="Keyword">public</a>
+<a id="233" class="Keyword">open</a> <a id="238" class="Keyword">import</a> <a id="245" href="Class.Monoid.html" class="Module">Class.Monoid</a> <a id="258" class="Keyword">public</a><a id="264" class="Symbol">;</a> <a id="266" class="Keyword">import</a> <a id="273" href="Test.Monoid.html" class="Module">Test.Monoid</a>
+<a id="285" class="Keyword">open</a> <a id="290" class="Keyword">import</a> <a id="297" href="Class.CommutativeMonoid.html" class="Module">Class.CommutativeMonoid</a> <a id="321" class="Keyword">public</a>
+<a id="328" class="Keyword">open</a> <a id="333" class="Keyword">import</a> <a id="340" href="Class.Functor.html" class="Module">Class.Functor</a> <a id="354" class="Keyword">public</a><a id="360" class="Symbol">;</a> <a id="362" class="Keyword">import</a> <a id="369" href="Test.Functor.html" class="Module">Test.Functor</a>
+<a id="382" class="Keyword">open</a> <a id="387" class="Keyword">import</a> <a id="394" href="Class.Bifunctor.html" class="Module">Class.Bifunctor</a> <a id="410" class="Keyword">public</a>
+<a id="417" class="Keyword">open</a> <a id="422" class="Keyword">import</a> <a id="429" href="Class.Applicative.html" class="Module">Class.Applicative</a> <a id="447" class="Keyword">public</a>
+<a id="454" class="Keyword">open</a> <a id="459" class="Keyword">import</a> <a id="466" href="Class.Monad.html" class="Module">Class.Monad</a> <a id="478" class="Keyword">public</a><a id="484" class="Symbol">;</a> <a id="486" class="Keyword">import</a> <a id="493" href="Class.Monad.Id.html" class="Module">Class.Monad.Id</a><a id="507" class="Symbol">;</a> <a id="509" class="Keyword">import</a> <a id="516" href="Test.Monad.html" class="Module">Test.Monad</a>
+<a id="527" class="Keyword">open</a> <a id="532" class="Keyword">import</a> <a id="539" href="Class.Foldable.html" class="Module">Class.Foldable</a> <a id="554" class="Keyword">public</a>
+<a id="561" class="Keyword">open</a> <a id="566" class="Keyword">import</a> <a id="573" href="Class.Traversable.html" class="Module">Class.Traversable</a> <a id="591" class="Keyword">public</a>
+<a id="598" class="Keyword">open</a> <a id="603" class="Keyword">import</a> <a id="610" href="Class.Pointed.html" class="Module">Class.Pointed</a> <a id="624" class="Keyword">public</a>
+<a id="631" class="Keyword">open</a> <a id="636" class="Keyword">import</a> <a id="643" href="Class.Group.html" class="Module">Class.Group</a> <a id="655" class="Keyword">public</a>
+<a id="662" class="Keyword">open</a> <a id="667" class="Keyword">import</a> <a id="674" href="Class.PartialSemigroup.html" class="Module">Class.PartialSemigroup</a> <a id="697" class="Keyword">public</a>
+<a id="704" class="Keyword">open</a> <a id="709" class="Keyword">import</a> <a id="716" href="Class.PartialMonoid.html" class="Module">Class.PartialMonoid</a> <a id="736" class="Keyword">public</a>
+<a id="743" class="Keyword">open</a> <a id="748" class="Keyword">import</a> <a id="755" href="Class.SeparationAlgebra.html" class="Module">Class.SeparationAlgebra</a> <a id="779" class="Keyword">public</a>
 
-<a id="533" class="Comment">-- ** Others</a>
-<a id="546" class="Keyword">open</a> <a id="551" class="Keyword">import</a> <a id="558" href="Class.Allable.html" class="Module">Class.Allable</a> <a id="572" class="Keyword">public</a>
-<a id="579" class="Keyword">open</a> <a id="584" class="Keyword">import</a> <a id="591" href="Class.Anyable.html" class="Module">Class.Anyable</a> <a id="605" class="Keyword">public</a>
-<a id="612" class="Keyword">open</a> <a id="617" class="Keyword">import</a> <a id="624" href="Class.Default.html" class="Module">Class.Default</a> <a id="638" class="Keyword">public</a>
-<a id="645" class="Keyword">open</a> <a id="650" class="Keyword">import</a> <a id="657" href="Class.HasAdd.html" class="Module">Class.HasAdd</a> <a id="670" class="Keyword">public</a>
-<a id="677" class="Keyword">open</a> <a id="682" class="Keyword">import</a> <a id="689" href="Class.HasOrder.html" class="Module">Class.HasOrder</a> <a id="704" class="Keyword">public</a>
-<a id="711" class="Keyword">open</a> <a id="716" class="Keyword">import</a> <a id="723" href="Class.Show.html" class="Module">Class.Show</a> <a id="734" class="Keyword">public</a>
-<a id="741" class="Keyword">open</a> <a id="746" class="Keyword">import</a> <a id="753" href="Class.ToBool.html" class="Module">Class.ToBool</a> <a id="766" class="Keyword">public</a>
-<a id="773" class="Keyword">open</a> <a id="778" class="Keyword">import</a> <a id="785" href="Class.MonotonePredicate.html" class="Module">Class.MonotonePredicate</a> <a id="809" class="Keyword">public</a> 
+<a id="787" class="Comment">-- ** Decidability</a>
+<a id="806" class="Keyword">open</a> <a id="811" class="Keyword">import</a> <a id="818" href="Class.DecEq.html" class="Module">Class.DecEq</a> <a id="830" class="Keyword">public</a><a id="836" class="Symbol">;</a> <a id="838" class="Keyword">import</a> <a id="845" href="Test.DecEq.html" class="Module">Test.DecEq</a>
+<a id="856" class="Keyword">open</a> <a id="861" class="Keyword">import</a> <a id="868" href="Class.DecEq.WithK.html" class="Module">Class.DecEq.WithK</a> <a id="886" class="Keyword">public</a>
+<a id="893" class="Keyword">open</a> <a id="898" class="Keyword">import</a> <a id="905" href="Class.Decidable.html" class="Module">Class.Decidable</a> <a id="921" class="Keyword">public</a><a id="927" class="Symbol">;</a> <a id="929" class="Keyword">import</a> <a id="936" href="Test.Decidable.html" class="Module">Test.Decidable</a>
 
-<a id="818" class="Comment">-- ** Tests</a>
-<a id="830" class="Keyword">open</a> <a id="835" class="Keyword">import</a> <a id="842" href="Test.Monoid.html" class="Module">Test.Monoid</a>
-<a id="854" class="Keyword">open</a> <a id="859" class="Keyword">import</a> <a id="866" href="Test.Functor.html" class="Module">Test.Functor</a>
-<a id="879" class="Keyword">open</a> <a id="884" class="Keyword">import</a> <a id="891" href="Test.DecEq.html" class="Module">Test.DecEq</a>
-<a id="902" class="Keyword">open</a> <a id="907" class="Keyword">import</a> <a id="914" href="Test.Decidable.html" class="Module">Test.Decidable</a>
-<a id="929" class="Keyword">open</a> <a id="934" class="Keyword">import</a> <a id="941" href="Test.Show.html" class="Module">Test.Show</a>
+<a id="952" class="Comment">-- ** Conversions</a>
+<a id="970" class="Keyword">open</a> <a id="975" class="Keyword">import</a> <a id="982" href="Class.ToBool.html" class="Module">Class.ToBool</a> <a id="995" class="Keyword">public</a>
+<a id="1002" class="Keyword">open</a> <a id="1007" class="Keyword">import</a> <a id="1014" href="Class.ToList.html" class="Module">Class.ToList</a> <a id="1027" class="Keyword">public</a>
+<a id="1034" class="Keyword">open</a> <a id="1039" class="Keyword">import</a> <a id="1046" href="Class.FromList.html" class="Module">Class.FromList</a> <a id="1061" class="Keyword">public</a>
+<a id="1068" class="Keyword">open</a> <a id="1073" class="Keyword">import</a> <a id="1080" href="Class.ToN.html" class="Module">Class.ToN</a> <a id="1090" class="Keyword">public</a>
+<a id="1097" class="Keyword">open</a> <a id="1102" class="Keyword">import</a> <a id="1109" href="Class.FromN.html" class="Module">Class.FromN</a> <a id="1121" class="Keyword">public</a>
+<a id="1128" class="Keyword">open</a> <a id="1133" class="Keyword">import</a> <a id="1140" href="Class.ToZ.html" class="Module">Class.ToZ</a> <a id="1150" class="Keyword">public</a>
+<a id="1157" class="Keyword">open</a> <a id="1162" class="Keyword">import</a> <a id="1169" href="Class.Coercions.html" class="Module">Class.Coercions</a> <a id="1185" class="Keyword">public</a><a id="1191" class="Symbol">;</a> <a id="1193" class="Keyword">import</a> <a id="1200" href="Test.Coercions.html" class="Module">Test.Coercions</a>
+
+<a id="1216" class="Comment">-- ** Overloading notation</a>
+<a id="1243" class="Keyword">open</a> <a id="1248" class="Keyword">import</a> <a id="1255" href="Class.Allable.html" class="Module">Class.Allable</a> <a id="1269" class="Keyword">public</a><a id="1275" class="Symbol">;</a> <a id="1277" class="Keyword">import</a> <a id="1284" href="Test.Allable.html" class="Module">Test.Allable</a>
+<a id="1297" class="Keyword">open</a> <a id="1302" class="Keyword">import</a> <a id="1309" href="Class.Anyable.html" class="Module">Class.Anyable</a> <a id="1323" class="Keyword">public</a><a id="1329" class="Symbol">;</a> <a id="1331" class="Keyword">import</a> <a id="1338" href="Test.Anyable.html" class="Module">Test.Anyable</a>
+<a id="1351" class="Keyword">open</a> <a id="1356" class="Keyword">import</a> <a id="1363" href="Class.HasAdd.html" class="Module">Class.HasAdd</a> <a id="1376" class="Keyword">public</a>
+<a id="1383" class="Keyword">open</a> <a id="1388" class="Keyword">import</a> <a id="1395" href="Class.HasOrder.html" class="Module">Class.HasOrder</a> <a id="1410" class="Keyword">public</a>
+<a id="1417" class="Keyword">open</a> <a id="1422" class="Keyword">import</a> <a id="1429" href="Class.HasMembership.html" class="Module">Class.HasMembership</a> <a id="1449" class="Keyword">public</a><a id="1455" class="Symbol">;</a> <a id="1457" class="Keyword">import</a> <a id="1464" href="Test.HasMembership.html" class="Module">Test.HasMembership</a>
+
+<a id="1484" class="Comment">-- ** Others</a>
+<a id="1497" class="Keyword">open</a> <a id="1502" class="Keyword">import</a> <a id="1509" href="Class.Default.html" class="Module">Class.Default</a> <a id="1523" class="Keyword">public</a>
+<a id="1530" class="Keyword">open</a> <a id="1535" class="Keyword">import</a> <a id="1542" href="Class.Show.html" class="Module">Class.Show</a> <a id="1553" class="Keyword">public</a><a id="1559" class="Symbol">;</a> <a id="1561" class="Keyword">import</a> <a id="1568" href="Test.Show.html" class="Module">Test.Show</a>
+<a id="1578" class="Keyword">open</a> <a id="1583" class="Keyword">import</a> <a id="1590" href="Class.MonotonePredicate.html" class="Module">Class.MonotonePredicate</a> <a id="1614" class="Keyword">public</a>
+<a id="1621" class="Keyword">open</a> <a id="1626" class="Keyword">import</a> <a id="1633" href="Class.Default.html" class="Module">Class.Default</a> <a id="1647" class="Keyword">public</a>
+<a id="1654" class="Keyword">open</a> <a id="1659" class="Keyword">import</a> <a id="1666" href="Class.Measurable.html" class="Module">Class.Measurable</a> <a id="1683" class="Keyword">public</a><a id="1689" class="Symbol">;</a> <a id="1691" class="Keyword">import</a> <a id="1698" href="Test.Measurable.html" class="Module">Test.Measurable</a>
+<a id="1714" class="Keyword">open</a> <a id="1719" class="Keyword">import</a> <a id="1726" href="Class.Null.html" class="Module">Class.Null</a> <a id="1737" class="Keyword">public</a>
+<a id="1744" class="Keyword">open</a> <a id="1749" class="Keyword">import</a> <a id="1756" href="Class.View.html" class="Module">Class.View</a> <a id="1767" class="Keyword">public</a><a id="1773" class="Symbol">;</a> <a id="1775" class="Keyword">import</a> <a id="1782" href="Test.View.html" class="Module">Test.View</a>
 </pre></body></html>
