@@ -1,3 +1,4 @@
+{-# OPTIONS --cubical-compatible #-}
 module Class.Allable.Core where
 
 open import Class.Prelude

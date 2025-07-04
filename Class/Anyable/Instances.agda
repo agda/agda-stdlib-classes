@@ -1,4 +1,5 @@
-module Class.Anyable.Instance where
+{-# OPTIONS --cubical-compatible #-}
+module Class.Anyable.Instances where
 
 open import Class.Prelude
 open import Class.Anyable.Core
@@ -18,17 +19,4 @@ instance
   Anyable-Maybe .Any = M.Any
 
   Anyable-List⁺ : Anyable {ℓ} List⁺
-  Anyable-List⁺ .Any P = Any P ∘ toList
-
-private
-  open import Class.Decidable
-  open import Class.HasOrder
-
-  _ : ∃[ x ∈ List ℕ ∋ 1 ∷ 2 ∷ 3 ∷ [] ] x > 0
-  _ = auto
-
-  _ : ∃[ x ∈ just 42 ] x > 0
-  _ = auto
-
-  _ : ∄[ x ∈ nothing ] x > 0
-  _ = auto
+  Anyable-List⁺ .Any P = Any P ∘ L⁺.toList

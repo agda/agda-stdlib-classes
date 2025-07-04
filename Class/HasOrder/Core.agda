@@ -2,7 +2,7 @@
 module Class.HasOrder.Core where
 
 open import Class.Prelude
-open import Class.Decidable
+open import Class.Decidable.Core
 open import Function.Bundles using (module Equivalence; mk⇔; _⇔_)
 open import Relation.Binary using
   ( IsPreorder; IsPartialOrder; IsEquivalence; Total; IsTotalOrder

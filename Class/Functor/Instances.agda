@@ -6,8 +6,8 @@ open import Class.Functor.Core
 
 instance
   Functor-Maybe : Functor Maybe
-  Functor-Maybe = record {M}
-    where import Data.Maybe as M renaming (map to _<$>_)
+  Functor-Maybe = record {Mb′}
+    where module Mb′ = Mb renaming (map to _<$>_)
 
   FunctorLaws-Maybe : FunctorLaws Maybe
   FunctorLaws-Maybe = λ where
@@ -32,12 +32,12 @@ instance
         (x ∷ xs) → cong (f (g x) ∷_) (q xs)
 
   Functor-List⁺ : Functor List⁺
-  Functor-List⁺ = record {L}
-    where import Data.List.NonEmpty as L renaming (map to _<$>_)
+  Functor-List⁺ = record {L⁺′}
+    where module L⁺′ = L⁺ renaming (map to _<$>_)
 
   Functor-Vec : ∀ {n} → Functor (flip Vec n)
-  Functor-Vec = record {V}
-    where import Data.Vec as V renaming (map to _<$>_)
+  Functor-Vec = record {V′}
+    where module V′ = V renaming (map to _<$>_)
 
   Functor-TC : Functor TC
   Functor-TC = record {R}

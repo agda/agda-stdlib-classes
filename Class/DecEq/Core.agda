@@ -1,4 +1,4 @@
-{-# OPTIONS --without-K #-}
+{-# OPTIONS --cubical-compatible #-}
 module Class.DecEq.Core where
 
 open import Class.Prelude
@@ -20,3 +20,6 @@ open DecEq ⦃...⦄ public
 DecEq¹ = DecEq ¹
 DecEq² = DecEq ²
 DecEq³ = DecEq ³
+
+Irrelevant⇒DecEq : Irrelevant A → DecEq A
+Irrelevant⇒DecEq ∀≡ ._≟_ = yes ∘₂ ∀≡

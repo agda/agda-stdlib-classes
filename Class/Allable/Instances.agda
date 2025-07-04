@@ -1,4 +1,5 @@
-module Class.Allable.Instance where
+{-# OPTIONS --cubical-compatible #-}
+module Class.Allable.Instances where
 
 open import Class.Prelude
 open import Class.Allable.Core
@@ -18,20 +19,4 @@ instance
   Allable-Maybe .All = M.All
 
   Allable-List⁺ : Allable {ℓ} List⁺
-  Allable-List⁺ .All P = All P ∘ toList
-
-private
-  open import Class.Decidable
-  open import Class.HasOrder
-
-  _ : ∀[ x ∈ List ℕ ∋ 1 ∷ 2 ∷ 3 ∷ [] ] x > 0
-  _ = auto
-
-  _ : ∀[ x ∈ just 42 ] x > 0
-  _ = auto
-
-  _ : ∀[ x ∈ nothing ] x > 0
-  _ = auto
-
-  _ : ¬∀[ x ∈ just 0 ] x > 0
-  _ = auto
+  Allable-List⁺ .All P = All P ∘ L⁺.toList

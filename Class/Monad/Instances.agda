@@ -2,7 +2,10 @@
 module Class.Monad.Instances where
 
 open import Class.Prelude
+open import Class.Functor.Core
+open import Class.Applicative
 open import Class.Monad.Core
+open import Class.Monad.Id
 
 instance
   Monad-TC : Monad TC
@@ -19,3 +22,13 @@ instance
     .return → just
     ._>>=_  → Maybe._>>=_
    where import Data.Maybe as Maybe
+
+  MonadLaws-Maybe : MonadLaws Maybe
+  MonadLaws-Maybe = λ where
+    .>>=-identityˡ → refl
+    .>>=-identityʳ → λ where
+      (just _) → refl
+      nothing  → refl
+    .>>=-assoc → λ where
+      (just _) → refl
+      nothing  → refl

@@ -3,20 +3,29 @@ module Class.Traversable.Instances where
 
 open import Class.Prelude
 open import Class.Functor
+open import Class.Applicative
 open import Class.Monad
 open import Class.Traversable.Core
 
 instance
-  Traversable-Maybe : Traversable Maybe
-  Traversable-Maybe .sequence = λ where
-    nothing  → return nothing
-    (just x) → x >>= return ∘ just
+  TraversableA-Maybe : TraversableA Maybe
+  TraversableA-Maybe .sequenceA = λ where
+    nothing  → ⦇ nothing ⦈
+    (just x) → ⦇ just x  ⦈
 
-  Traversable-List : Traversable List
-  Traversable-List .sequence = go
-    where go = λ where
-      []       → return []
-      (m ∷ ms) → do x ← m; xs ← go ms; return (x ∷ xs)
+  TraversableM-Maybe : Traversable Maybe
+  TraversableM-Maybe .sequence = sequenceA
 
-  Traversable-List⁺ : Traversable List⁺
-  Traversable-List⁺ .sequence (m ∷ ms) = do x ← m; xs ← sequence ms; return (x ∷ xs)
+  TraversableA-List : TraversableA List
+  TraversableA-List .sequenceA = go where go = λ where
+    []       → ⦇ [] ⦈
+    (m ∷ ms) → ⦇ m ∷ go ms ⦈
+
+  TraversableM-List : Traversable List
+  TraversableM-List .sequence = sequenceA
+
+  TraversableA-List⁺ : TraversableA List⁺
+  TraversableA-List⁺ .sequenceA (m ∷ ms) = ⦇ m ∷ sequenceA ms ⦈
+
+  TraversableM-List⁺ : Traversable List⁺
+  TraversableM-List⁺ .sequence = sequenceA

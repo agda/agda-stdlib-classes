@@ -1,3 +1,4 @@
+{-# OPTIONS --cubical-compatible #-}
 module Class.Anyable.Core where
 
 open import Class.Prelude

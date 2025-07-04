@@ -1,10 +1,10 @@
-{-# OPTIONS --without-K #-}
+{-# OPTIONS --cubical-compatible #-}
 module Class.Decidable.Core where
+
+open import Relation.Nullary.Decidable using (True; False; toWitness; toWitnessFalse)
 
 open import Class.Prelude
 open import Class.Core
-
-open import Relation.Nullary.Decidable using (True; False; toWitness; toWitnessFalse)
 
 record _⁇ (P : Type ℓ) : Type ℓ where
   constructor ⁇_
@@ -23,13 +23,6 @@ open _⁇ ⦃...⦄ public
 
 ¿_¿ᵇ : (P : Type ℓ) → ⦃ P ⁇ ⦄ → Bool
 ¿ P ¿ᵇ = ⌊ ¿ P ¿ ⌋
-
-infix 0 ifᵈ_then_else_
-ifᵈ_then_else_ : ∀ {X : Type ℓ} (P : Type ℓ′)
-  → ⦃ P ⁇ ⦄ → ({_ : P} → X) → ({_ : ¬ P} → X) → X
-ifᵈ P then t else f with ¿ P ¿
-... | yes p = t {p}
-... | no ¬p = f {¬p}
 
 _⁇¹ = _⁇ ¹
 _⁇² = _⁇ ²

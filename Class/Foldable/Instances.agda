@@ -9,7 +9,10 @@ open import Class.Foldable.Core
 
 instance
   Foldable-List : Foldable List
-  Foldable-List .fold = go where go = λ where
-    [] → ε
-    (x ∷ []) → x
-    (x ∷ xs@(_ ∷ _)) → x ◇ go xs
+  Foldable-List .fold = foldr _◇_ ε
+
+  Foldable-Maybe : Foldable Maybe
+  Foldable-Maybe .fold = fromMaybe ε
+
+  Foldable-List⁺ : Foldable List⁺
+  Foldable-List⁺ .fold (x ∷ xs) = x ◇ fold xs

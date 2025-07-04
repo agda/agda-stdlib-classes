@@ -2,6 +2,7 @@
 module Class.Monoid.Instances where
 
 open import Class.Prelude
+open import Class.Setoid.Core
 open import Class.Semigroup
 open import Class.Monoid.Core
 
@@ -28,6 +29,23 @@ module _ ⦃ _ : Semigroup A ⦄ ⦃ _ : Monoid A ⦄ where instance
     where open Alg≡
           p = LeftIdentity ε  _◇_ ∋ λ _ → refl
           q = RightIdentity ε _◇_ ∋ λ where (just _) → refl; nothing → refl
+
+module _ ⦃ _ : Semigroup A ⦄ ⦃ _ : Semigroup B ⦄ where instance
+  Monoid-× : ⦃ Monoid A ⦄ → ⦃ Monoid B ⦄ → Monoid (A × B)
+  Monoid-× .ε = ε , ε
+
+  MonoidLaws-× : ⦃ _ : Monoid A ⦄ ⦃ _ : Monoid B ⦄
+               → ⦃ MonoidLaws≡ A ⦄ → ⦃ MonoidLaws≡ B ⦄
+               → MonoidLaws≡ (A × B)
+  MonoidLaws-× = record {ε-identity = p , q}
+    where
+      open Alg≡
+
+      p : LeftIdentity (A × B ∋ ε)  _◇_
+      p (a , b) rewrite ε-identityˡ≡ a | ε-identityˡ≡ b = refl
+
+      q : RightIdentity (A × B ∋ ε) _◇_
+      q (a , b) rewrite ε-identityʳ≡ a | ε-identityʳ≡ b = refl
 
 -- ** natural numbers
 module _ where
@@ -68,7 +86,7 @@ module _ where
     MonoidLaws-ℤ-* = MonoidLaws≡ ℤ ∋ record {ε-identity = *-identityˡ , *-identityʳ}
 
 -- ** maybes
-module _ ⦃ _ : Semigroup A ⦄ ⦃ _ : Monoid A ⦄ ⦃ _ : MonoidLaws≡ A ⦄ (x : A) where
+module _ ⦃ _ : Semigroup A ⦄ ⦃ _ : Monoid A ⦄ ⦃ _ : ISetoid A ⦄ ⦃ _ : MonoidLaws≡ A ⦄ (x : A) where
   just-◇ˡ : ∀ (mx : Maybe A) →
     just x ◇ mx ≡ just (x ◇ fromMaybe ε mx)
   just-◇ˡ = λ where
