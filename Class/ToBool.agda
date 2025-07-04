@@ -5,14 +5,11 @@ open import Class.Prelude hiding (if_then_else_; ⊤; tt)
 open import Data.Unit.Polymorphic using (⊤; tt)
 open import Class.Decidable.Core
 
-private variable
-  X : Type ℓ; P : X → Type ℓ
-
 record ToBool′ (A : Type ℓ) (P 𝕋 𝔽 : A → Type ℓ′) : Type (ℓ ⊔ ℓ′) where
   field decide : (a : A) → ⦃ P a ⦄ → 𝕋 a ⊎ 𝔽 a
 
   infix -10 if_then_else_
-  if_then_else_ : (a : A) ⦃ _ : P a ⦄ → ({𝕋 a} → X) → ({𝔽 a} → X) → X
+  if_then_else_ : (a : A) ⦃ _ : P a ⦄ → ({𝕋 a} → B) → ({𝔽 a} → B) → B
   if a then t else f =
     case decide a of λ where
       (inj₁ 𝕥) → t {𝕥}
@@ -31,12 +28,12 @@ instance
     true  → inj₁ refl
     false → inj₂ refl
 
-  ToBool-Dec : ToBool (Dec X) (const X) (const $ ¬ X)
+  ToBool-Dec : ToBool (Dec B) (const B) (const $ ¬ B)
   ToBool-Dec .decide = λ where
     (yes x) → inj₁ x
     (no ¬x) → inj₂ ¬x
 
-  ToBool-Maybe : ToBool (Maybe X) (const X) (const ⊤)
+  ToBool-Maybe : ToBool (Maybe B) (const B) (const ⊤)
   ToBool-Maybe .decide = λ where
     (just x) → inj₁ x
     nothing  → inj₂ tt

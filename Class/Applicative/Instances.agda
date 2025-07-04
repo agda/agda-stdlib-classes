@@ -49,7 +49,8 @@ instance
   -- Applicative-∃Vec : Applicative (∃ ∘ Vec)
   -- Applicative-∃Vec = λ where
   --   .pure x → 1 , pure x
-  --   ._<*>_ (n , xs) (m , ys) → {! (n ⊔ m) , zipWith _$_ xs ys  -- (+ zipWith-⊔ lemma) !}
+  --   ._<*>_ (n , xs) (m , ys) →
+  --     {! (n ⊔ m) , zipWith _$_ xs ys (+ zipWith-⊔ lemma) !}
 
   private module M where
     open import Reflection.TCM.Syntax public

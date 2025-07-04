@@ -11,6 +11,7 @@ record Monad (M : Type↑) : Typeω where
   infixr 1 _=<<_ _<=<_
 
   field
+    overlap ⦃ super ⦄ : Applicative M
     return : A → M A
     _>>=_  : M A → (A → M B) → M B
 
@@ -19,6 +20,8 @@ record Monad (M : Type↑) : Typeω where
 
   _=<<_ : (A → M B) → M A → M B
   f =<< c = c >>= f
+
+  _≫=_ = _>>=_; _≫_ = _>>_; _=≪_ = _=<<_
 
   _>=>_ : (A → M B) → (B → M C) → (A → M C)
   f >=> g = _=<<_ g ∘ f
@@ -32,24 +35,25 @@ record Monad (M : Type↑) : Typeω where
   Functor-M : Functor M
   Functor-M = λ where ._<$>_ f x → return ∘ f =<< x
 
-  instance _ = Functor-M
+open Monad ⦃...⦄ public
 
+module _ ⦃ _ : Monad M ⦄ where
   mapM : (A → M B) → List A → M (List B)
   mapM f []       = return []
-  mapM f (x ∷ xs) = do y ← f x; y ∷_ <$> mapM f xs
+  mapM f (x ∷ xs) = ⦇ f x ∷ mapM f xs ⦈
 
   concatMapM : (A → M (List B)) → List A → M (List B)
   concatMapM f xs = concat <$> mapM f xs
 
   forM : List A → (A → M B) → M (List B)
   forM []       _ = return []
-  forM (x ∷ xs) f = do y ← f x; y ∷_ <$> forM xs f
+  forM (x ∷ xs) f = ⦇ f x ∷ forM xs f ⦈
 
   concatForM : List A → (A → M (List B)) → M (List B)
   concatForM xs f = concat <$> forM xs f
 
   return⊤ void : M A → M ⊤
-  return⊤ k = k >> return tt
+  return⊤ k = k ≫ return tt
   void = return⊤
 
   filterM : (A → M Bool) → List A → M (List A)
@@ -58,8 +62,36 @@ record Monad (M : Type↑) : Typeω where
     b ← p x
     ((if b then [ x ] else []) ++_) <$> filterM p xs
 
-  traverseM : ⦃ Applicative M ⦄ → ⦃ Monad M ⦄ → (A → M B) → List A → M (List B)
+  traverseM : (A → M B) → List A → M (List B)
   traverseM f = λ where
     [] → return []
     (x ∷ xs) → ⦇ f x ∷ traverseM f xs ⦈
-open Monad ⦃...⦄ public
+
+record MonadLaws (M : Type↑) ⦃ _ : Monad M ⦄ : Typeω where
+  field
+    >>=-identityˡ : ∀ {A : Type ℓ} {B : Type ℓ′} →
+      ∀ {a : A} {h : A → M B} →
+        (return a >>= h) ≡ h a
+    >>=-identityʳ : ∀ {A : Type ℓ} →
+      ∀ (m : M A) →
+        (m >>= return) ≡ m
+    >>=-assoc : ∀ {A : Type ℓ} {B : Type ℓ′} {C : Type ℓ″} →
+      ∀ (m : M A) {g : A → M B} {h : B → M C} →
+        ((m >>= g) >>= h) ≡ (m >>= (λ x → g x >>= h))
+open MonadLaws ⦃...⦄ public
+
+record Monad₀ (M : Type↑) : Typeω where
+  field ⦃ isMonad ⦄ : Monad M
+        ⦃ isApplicative₀ ⦄ : Applicative₀ M
+open Monad₀ ⦃...⦄ using () public
+instance
+  mkMonad₀ : ⦃ Monad M ⦄ → ⦃ Applicative₀ M ⦄ → Monad₀ M
+  mkMonad₀ = record {}
+
+record Monad⁺ (M : Type↑) : Typeω where
+  field ⦃ isMonad ⦄ : Monad M
+        ⦃ isAlternative ⦄ : Alternative M
+open Monad⁺ ⦃...⦄ using () public
+instance
+  mkMonad⁺ : ⦃ Monad M ⦄ → ⦃ Alternative M ⦄ → Monad⁺ M
+  mkMonad⁺ = record {}

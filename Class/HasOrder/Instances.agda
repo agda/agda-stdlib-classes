@@ -1,5 +1,5 @@
 {-# OPTIONS --without-K #-}
-module Class.HasOrder.Instance where
+module Class.HasOrder.Instances where
 
 open import Class.DecEq
 open import Class.Decidable
