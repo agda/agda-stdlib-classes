@@ -20,3 +20,6 @@ instance
 
   ToList-Vec : ∀ {n} → ToList (Vec A n) A
   ToList-Vec .toList = V.toList
+
+  ToList-Maybe : ToList (Maybe A) A
+  ToList-Maybe .toList = L.fromMaybe
