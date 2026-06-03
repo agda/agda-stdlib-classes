@@ -7,7 +7,7 @@ open import Class.Functor
 open import Class.Semigroup
 open import Class.Monoid
 
-record Foldable (F : Type↑) ⦃ _ : Functor F ⦄ : Typeω where
+record Foldable (F : Type↑ ℓ↑) ⦃ _ : Functor F ⦄ : Typeω where
   field fold : ⦃ _ : Semigroup A ⦄ → ⦃ Monoid A ⦄ → F A → A
 
   foldMap : ⦃ _ : Semigroup B ⦄ → ⦃ Monoid B ⦄ → (A → B) → F A → B
@@ -15,7 +15,7 @@ record Foldable (F : Type↑) ⦃ _ : Functor F ⦄ : Typeω where
 
 open Foldable ⦃...⦄ public
 
-record Foldable′ (F : Type↑) ⦃ _ : Functor F ⦄ : Typeω where
+record Foldable′ (F : Type↑ ℓ↑) ⦃ _ : Functor F ⦄ : Typeω where
   field foldMap′ : ⦃ _ : Semigroup B ⦄ → ⦃ Monoid B ⦄ → (A → B) → F A → B
 
   fold′ : ⦃ _ : Semigroup A ⦄ → ⦃ Monoid A ⦄ → F A → A

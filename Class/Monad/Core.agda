@@ -3,10 +3,11 @@ module Class.Monad.Core where
 
 open import Class.Prelude
 open import Class.Core
-open import Class.Functor
-open import Class.Applicative
+open import Class.Functor.Core
+open import Class.Applicative.Core
 
-record Monad (M : Type↑) : Typeω where
+record Monad (M : Type↑ ℓ↑) : Typeω where
+  constructor mkMonad
   infixl 1 _>>=_ _>>_ _>=>_
   infixr 1 _=<<_ _<=<_
 
@@ -31,9 +32,6 @@ record Monad (M : Type↑) : Typeω where
 
   join : M (M A) → M A
   join m = m >>= id
-
-  Functor-M : Functor M
-  Functor-M = λ where ._<$>_ f x → return ∘ f =<< x
 
 open Monad ⦃...⦄ public
 
@@ -67,7 +65,13 @@ module _ ⦃ _ : Monad M ⦄ where
     [] → return []
     (x ∷ xs) → ⦇ f x ∷ traverseM f xs ⦈
 
-record MonadLaws (M : Type↑) ⦃ _ : Monad M ⦄ : Typeω where
+  whenM : Bool -> M ⊤ -> M ⊤
+  whenM cond act =
+      if cond
+      then act >> return _
+      else return _
+
+record MonadLaws (M : Type↑ ℓ↑) ⦃ _ : Monad M ⦄ : Typeω where
   field
     >>=-identityˡ : ∀ {A : Type ℓ} {B : Type ℓ′} →
       ∀ {a : A} {h : A → M B} →
@@ -80,7 +84,23 @@ record MonadLaws (M : Type↑) ⦃ _ : Monad M ⦄ : Typeω where
         ((m >>= g) >>= h) ≡ (m >>= (λ x → g x >>= h))
 open MonadLaws ⦃...⦄ public
 
-record Monad₀ (M : Type↑) : Typeω where
+module MkMonad
+  (return : ∀ {ℓ} {A : Type ℓ} → A → M A)
+  (_>>=_ : ∀ {ℓ ℓ′} {A : Type ℓ} {B : Type ℓ′} → M A → (A → M B) → M B)
+  where instance
+
+  ⇒Functor : Functor M
+  ⇒Functor ._<$>_ f mx = mx >>= (return ∘ f)
+
+  ⇒Applicative : Applicative M
+  ⇒Applicative = λ where
+    .pure → return
+    ._<*>_ mf mx → mf >>= (_<$> mx)
+
+  ⇒Monad : Monad M
+  ⇒Monad = mkMonad return _>>=_
+
+record Monad₀ (M : Type↑ ℓ↑) : Typeω where
   field ⦃ isMonad ⦄ : Monad M
         ⦃ isApplicative₀ ⦄ : Applicative₀ M
 open Monad₀ ⦃...⦄ using () public
@@ -88,7 +108,7 @@ instance
   mkMonad₀ : ⦃ Monad M ⦄ → ⦃ Applicative₀ M ⦄ → Monad₀ M
   mkMonad₀ = record {}
 
-record Monad⁺ (M : Type↑) : Typeω where
+record Monad⁺ (M : Type↑ ℓ↑) : Typeω where
   field ⦃ isMonad ⦄ : Monad M
         ⦃ isAlternative ⦄ : Alternative M
 open Monad⁺ ⦃...⦄ using () public
