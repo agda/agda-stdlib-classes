@@ -5,7 +5,8 @@ open import Class.Prelude
 open import Class.Core
 open import Class.Functor.Core
 
-record Applicative (F : Type↑) : Typeω where
+record Applicative (F : Type↑ ℓ↑) : Typeω where
+  constructor mkApplicative
   infixl 4 _<*>_ _⊛_ _<*_ _<⊛_ _*>_ _⊛>_
   infix  4 _⊗_
 
@@ -34,13 +35,24 @@ record Applicative (F : Type↑) : Typeω where
 
 open Applicative ⦃...⦄ public
 
-record Applicative₀ (F : Type↑) : Typeω where
+module MkApplicative
+  (pure : ∀ {ℓ} {A : Type ℓ} → A → F A)
+  (_<*>_ : ∀ {ℓ ℓ′} {A : Type ℓ} {B : Type ℓ′} → F (A → B) → F A → F B)
+  where instance
+
+  ⇒Functor : Functor F
+  ⇒Functor ._<$>_ f mx = pure f <*> mx
+
+  ⇒Applicative : Applicative F
+  ⇒Applicative = mkApplicative pure _<*>_
+
+record Applicative₀ (F : Type↑ ℓ↑) : Typeω where
   field
     overlap ⦃ super ⦄ : Applicative F
     ε₀ : F A
 open Applicative₀ ⦃...⦄ public
 
-record Alternative (F : Type↑) : Typeω where
+record Alternative (F : Type↑ ℓ↑) : Typeω where
   infixr 3 _<|>_
   field _<|>_ : F A → F A → F A
 open Alternative ⦃...⦄ public

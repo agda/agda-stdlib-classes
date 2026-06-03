@@ -2,10 +2,8 @@
 module Class.Monad.Instances where
 
 open import Class.Prelude
-open import Class.Functor.Core
 open import Class.Applicative
 open import Class.Monad.Core
-open import Class.Monad.Id
 
 instance
   Monad-TC : Monad TC
@@ -32,3 +30,9 @@ instance
     .>>=-assoc → λ where
       (just _) → refl
       nothing  → refl
+
+module _ {X : Type ℓ} where
+  module Monad-Sumˡ = MkMonad {M = X ⊎_}
+    inj₂ (λ where (inj₁ a) f → inj₁ a; (inj₂ b) f → f b)
+  module Monad-Sumʳ = MkMonad {M = _⊎ X}
+    inj₁ (λ where (inj₁ a) f → f a; (inj₂ b) f → inj₂ b)

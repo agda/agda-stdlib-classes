@@ -6,7 +6,7 @@ open import Class.Core
 open import Class.Applicative.Core
 open import Class.Monad.Core
 
-record Pointed (F : Type↑) : Typeω where
+record Pointed (F : Type↑ ℓ↑) : Typeω where
   field point : ∀ {A : Type ℓ} → A → F A
 open Pointed ⦃...⦄ public
 
