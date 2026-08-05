@@ -74,7 +74,7 @@ open Meta public
   using (TC; Arg; Abs)
 
 open import Relation.Nullary public
-  using (¬_; Dec; yes; no; contradiction; Irrelevant)
+  using (¬_; Dec; does; yes; no; contradiction; Irrelevant)
 open import Relation.Nullary.Decidable public
   using (⌊_⌋; dec-yes; isYes; _×-dec_)
   renaming (map′ to mapDec)

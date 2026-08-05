@@ -7,14 +7,17 @@ open import Class.Core
 record DecEq (A : Type ℓ) : Type ℓ where
   field _≟_ : DecidableEquality A
 
-  _==_ _≡ᵇ_ : A → A → Bool
-  x == y = ⌊ x ≟ y ⌋
-  _≡ᵇ_ = _==_
+  -- lazy (c.f. James Wood's SPLS'19 talk "A Bool in the Hand is Worth Two in the Bush")
+  _==_ _≠_ : A → A → Bool
+  _==_ = does ∘₂ _≟_
+  _≠_  = not  ∘₂ _==_
 
-  _≠_ : A → A → Bool
-  x ≠ y = not (x == y)
+  -- strict
+  _≡ᵇ_ _≢ᵇ_ : A → A → Bool
+  _≡ᵇ_ = isYes ∘₂ _≟_
+  _≢ᵇ_ = not   ∘₂ _≡ᵇ_
 
-  infix 4 _≟_ _≡ᵇ_ _==_ _≠_
+  infix 4 _≟_ _==_ _≠_ _≡ᵇ_ _≢ᵇ_
 open DecEq ⦃...⦄ public
 
 DecEq¹ = DecEq ¹
