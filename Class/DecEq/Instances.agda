@@ -54,8 +54,12 @@ module _ ⦃ _ : DecEq A ⦄ where instance
 module _ ⦃ _ : DecEq A ⦄ ⦃ _ : DecEq B ⦄ where
 
   -- Not exported as instance so that users can also choose `Class.DecEq.WithK.DecEq-Σ`
+
+  -- For performance reasons, this is not ×.≡-dec. `(a₁ , b₁) ≡ᵇ (a₂ , b₂)` should reduce
+  -- to `a₁ ≡ᵇ a₂ ∧ b₁ ≡ᵇ b₂`, which the definition below does, but `×.≡-dec` would also
+  -- match on the proof of `a₁ ≡ a₂`, which may force huge proof terms.
   DecEq-× : DecEq (A × B)
-  DecEq-× ._≟_ = ×.≡-dec _≟_ _≟_
+  DecEq-× ._≟_ (a₁ , b₁) (a₂ , b₂) = mapDec ×.×-≡,≡→≡ ×.×-≡,≡←≡ (a₁ ≟ a₂ ×-dec b₁ ≟ b₂)
     where import Data.Product.Properties as ×
 
   instance
