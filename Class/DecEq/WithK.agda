@@ -8,7 +8,7 @@ module Class.DecEq.WithK ⦃ _ : DecEq A ⦄ where
 ≟-refl x with refl , p ← dec-yes (x ≟ x) refl = p
 
 ==-refl : ∀ (x : A) → T (x == x)
-==-refl _ = subst (T ∘ isYes) (sym $ ≟-refl _) tt
+==-refl _ = subst (T ∘ does) (sym $ ≟-refl _) tt
 
 ≡ᵇ-refl = ==-refl
 
