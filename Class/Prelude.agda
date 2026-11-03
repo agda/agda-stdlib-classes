@@ -76,7 +76,7 @@ open Meta public
 open import Relation.Nullary public
   using (¬_; Dec; does; yes; no; contradiction; Irrelevant)
 open import Relation.Nullary.Decidable public
-  using (⌊_⌋; dec-yes; isYes; _×-dec_)
+  using (⌊_⌋; dec-yes; isYes; _×?_)
   renaming (map′ to mapDec)
 open import Relation.Unary public
   using (Pred)

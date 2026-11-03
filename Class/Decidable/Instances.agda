@@ -23,17 +23,17 @@ instance
   open import Relation.Nullary.Decidable as D
 
   Dec-→ : ⦃ A ⁇ ⦄ → ⦃ B ⁇ ⦄ → (A → B) ⁇
-  Dec-→ .dec = dec D.→-dec dec
+  Dec-→ .dec = dec D.→? dec
 
   -- ** products
 
   Dec-× : ⦃ A ⁇ ⦄ → ⦃ B ⁇ ⦄ → (A × B) ⁇
-  Dec-× .dec = dec D.×-dec dec
+  Dec-× .dec = dec D.×? dec
 
   -- ** sums
 
   Dec-⊎ : ⦃ A ⁇ ⦄ → ⦃ B ⁇ ⦄ → (A ⊎ B) ⁇
-  Dec-⊎ .dec = dec D.⊎-dec dec
+  Dec-⊎ .dec = dec D.⊎? dec
 
   Dec-T : T ⁇¹
   Dec-T = ⁇¹ 𝔹.T?

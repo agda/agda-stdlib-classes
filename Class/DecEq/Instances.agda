@@ -59,7 +59,7 @@ module _ ⦃ _ : DecEq A ⦄ ⦃ _ : DecEq B ⦄ where
   -- to `a₁ ≡ᵇ a₂ ∧ b₁ ≡ᵇ b₂`, which the definition below does, but `×.≡-dec` would also
   -- match on the proof of `a₁ ≡ a₂`, which may force huge proof terms.
   DecEq-× : DecEq (A × B)
-  DecEq-× ._≟_ (a₁ , b₁) (a₂ , b₂) = mapDec ×.×-≡,≡→≡ ×.×-≡,≡←≡ (a₁ ≟ a₂ ×-dec b₁ ≟ b₂)
+  DecEq-× ._≟_ (a₁ , b₁) (a₂ , b₂) = mapDec ×.×-≡,≡→≡ ×.×-≡,≡←≡ (a₁ ≟ a₂ ×? b₁ ≟ b₂)
     where import Data.Product.Properties as ×
 
   instance
