@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --without-K #-}
 module Class.ToZ where
 
 open import Class.Prelude

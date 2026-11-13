@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --without-K #-}
 module Class.Semigroup.Instances where
 
 open import Class.Prelude

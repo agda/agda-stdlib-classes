@@ -7,10 +7,10 @@ open import Class.DecEq.Core
 -- ** basic types
 instance
   DecEq-⊥      = DecEq ⊥ ∋ λ where ._≟_ ()
-  DecEq-⊤      = DecEq _ ∋ record {M} where import Data.Unit as M
+  DecEq-⊤      = DecEq _ ∋ record { _≟_ = M._≡?_ } where import Data.Unit as M
   DecEq-Bool   = DecEq _ ∋ record {M} where import Data.Bool as M
   DecEq-ℕ      = DecEq _ ∋ record {M} where import Data.Nat as M
-  DecEq-ℤ      = DecEq _ ∋ record {M} where import Data.Integer as M
+  DecEq-ℤ      = DecEq _ ∋ record { _≟_ = M._≡?_ } where import Data.Integer as M
   DecEq-ℚ      = DecEq _ ∋ record {M} where import Data.Rational.Properties as M
   DecEq-Char   = DecEq _ ∋ record {M} where import Data.Char as M
   DecEq-String = DecEq _ ∋ record {M} where import Data.String as M

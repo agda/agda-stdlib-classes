@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --without-K #-}
 module Class.HasMembership.Core where
 
 open import Relation.Nullary.Decidable using (¬?)

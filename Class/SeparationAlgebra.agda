@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --without-K #-}
 module Class.SeparationAlgebra where
 
 open import Function.Definitions using (Injective)

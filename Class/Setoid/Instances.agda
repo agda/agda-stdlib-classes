@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --without-K #-}
 module Class.Setoid.Instances where
 
 open import Class.Prelude
@@ -24,6 +24,6 @@ instance
       {nothing} {just _}  → id
       {nothing} {nothing} → id
     ; trans = λ where
-      {just x}  {just y}  {just z}  p q → ≈-trans {i = x}{y}{z} p q
+      {just x}  {just y}  {just z}  p q → ≈-trans {x = x}{y}{z} p q
       {nothing} {nothing} {nothing} p _ → p
     }

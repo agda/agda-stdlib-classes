@@ -2,7 +2,7 @@
 -- Provides us with forward composition as _>=>_,
 -- but might break instance-resolution/typeclass-inference
 
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --without-K #-}
 module Class.Monad.Id where
 
 open import Class.Prelude

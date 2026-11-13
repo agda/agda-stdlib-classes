@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --without-K #-}
 module Class.Decidable.Core where
 
 open import Relation.Nullary.Decidable using (True; False; toWitness; toWitnessFalse)

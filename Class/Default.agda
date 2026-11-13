@@ -2,7 +2,7 @@
 -- Types with a default value.
 ------------------------------------------------------------------------
 
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --without-K #-}
 module Class.Default where
 
 open import Class.Default.Core public
